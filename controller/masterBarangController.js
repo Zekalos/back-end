@@ -25,26 +25,34 @@ exports.create = async (req, res) => {
         }
     )
     */
-
-    const barang = await db.masterBarang.create({
-        //kodebarang: req.body.kodebarang,
-        namabarang: req.body.namabarang,
-        category: req.body.category, 
-        subCategory: req.body.subCategory,
-        type: req.body.type,
-        merk: req.body.merk,  
-        satuan: req.body.satuan,
-        ukuran: req.body.ukuran,
-        proyek: req.body.proyek,
-        totalQTY: 0
-    });
-    res.json(barang)
+    try{
+        const barang = await db.masterBarang.create({
+            //kodebarang: req.body.kodebarang,
+            namabarang: req.body.namabarang,
+            category: req.body.category, 
+            subCategory: req.body.subCategory,
+            type: req.body.type,
+            merk: req.body.merk,  
+            satuan: req.body.satuan,
+            ukuran: req.body.ukuran,
+            proyek: req.body.proyek,
+            totalQTY: 0
+        });
+        res.json(barang);
+    }catch(e){
+        res.json(e);
+    }
+    
 };
 
 exports.seeAll = async (req, res) => {
-    const masterBarang = await db.masterBarang.findAll();
+    try{
+        const masterBarang = await db.masterBarang.findAll();
 
-    res.json(masterBarang);
+        res.json(masterBarang);
+    }catch(e){
+        res.json(e);
+    }
 };
 
 exports.seeMasterBarangProyek = async (req, res) => {
@@ -56,6 +64,18 @@ exports.seeMasterBarangProyek = async (req, res) => {
 
     res.json(masterBarang);
 };
+
+exports.seeNamaBarang = async (req, res) => {
+    try{
+        const masterBarang = await db.masterBarang.findAll({
+            attributes: ['namabarang']
+        });
+        res.json(masterBarang);
+    }catch(e){
+        res.json(e);
+    }
+};
+
 
 exports.checkBarang = async (req, res) => {
     const masterBarang = await db.masterBarang.findByPk(req.query.namabarang);

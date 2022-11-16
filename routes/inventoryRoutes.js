@@ -4,9 +4,14 @@ module.exports = (express, app) => {
   
     router.post("/", controller.create);
 
-    router.put("/inventoryMasuk", controller.inventoryBarangMasuk);
-    router.put("/inventoryKeluar", controller.inventoryBarangKeluar);
+    router.post("/inventoryMasuk", controller.inventoryBarangMasuk);
+    router.post("/inventoryKeluar", controller.inventoryBarangKeluar);
 
+    router.post("/seeInventory", controller.seeAllInventory);
+    router.post("/find", controller.findInventory);
+
+
+    //gk pake
     router.get("/vanyaParkClusterAzura", controller.seeAllVANYAPARKCLUSTERAZURA);
     router.get("/kantorKeluarahanCilenggang", controller.seeAllKANTORKELURAHANCILENGGANG);
     router.get("/kanaparkClusterNobu", controller.seeAllKANAPARKCLUSTERNOBU);
@@ -14,9 +19,6 @@ module.exports = (express, app) => {
     router.get("/gudangSerpong", controller.seeAllGUDANGSERPONG);
     router.get("/serpongLagoonA16", controller.seeAllSERPONGLAGOONA16);
     router.get("/gateCluster", controller.seeAllGATECLUSTER);
-    router.get("/seeInventory", controller.seeAllInventory);
-
-    router.get("/find", controller.findInventory);
     router.get("/findVanyaParkClusterAzura", controller.findInventoryVanyaParkClusterAzura);
     router.get("/findKantorKelurahanCilenggang", controller.findInventoryKantorKelurahanCilenggang);
     router.get("/findGudangSerpong", controller.findInventoryGudangSerpong);

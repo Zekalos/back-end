@@ -2,7 +2,7 @@ module.exports = (express, app) => {
     const controller = require("../controller/barangMasukController.js");
     const router = express.Router();
   
-    router.get("/listBarangMasuk", controller.seeAllBarangMasuk);
+    router.post("/listBarangMasuk", controller.seeAllBarangMasuk);
     //router.get("/getSuratJalan", controller.findSuratJalan);
 
     router.get("/getPO", controller.getPO);

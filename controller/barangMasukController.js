@@ -6,7 +6,8 @@ exports.createBarangMasuk = async (req, res) => {
         namabarang: req.body.namabarang,
         namaPenerima: req.body.namaPenerima,
         quantity: req.body.quantity,  
-        noSuratJalan: req.body.noSuratJalan1 + req.body.noSuratJalan2,
+        // noSuratJalan: req.body.noSuratJalan1 + req.body.noSuratJalan2,
+        noSuratJalan: req.body.noSuratJalan,
         tgl: req.body.tgl,
         status: "masuk",
         lokasi: req.body.lokasi,
@@ -23,9 +24,7 @@ exports.masukbanyakBarang = async (req, res) => {
         const barang = await db.barangMasuk.bulkCreate(req.body);
         res.json(barang)
     } catch (e) {
-        console.error(e);
-    }finally {
-        console.log('executed successfully');
+        res.json(e);
     }
     
 };
@@ -34,7 +33,10 @@ exports.masukbanyakBarang = async (req, res) => {
 exports.seeAllBarangMasuk = async (req, res) => {
     try{
         const barangMasuk = await db.barangMasuk.findAll({
-        order: [['tgl', 'DESC']]
+            where:{
+                proyek: req.body.proyek
+            },
+            order: [['tgl', 'DESC']]
         });
 
         res.json(barangMasuk);

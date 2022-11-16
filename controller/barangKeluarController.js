@@ -21,12 +21,15 @@ exports.create = async (req, res) => {
 exports.seeAll = async (req, res) => {
     try{
         const barangkeluar = await db.barangKeluar.findAll({
-        order: [['tgl', 'DESC']]
+            where:{
+                proyek: req.body.proyek
+            },
+            order: [['tgl', 'DESC']]
         });
 
         res.json(barangkeluar);
     }catch(e){
-        console.error(e)
+        res.json(e)
     }
 
 }

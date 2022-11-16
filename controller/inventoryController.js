@@ -25,9 +25,48 @@ exports.create = async (req, res) => {
 };
 
 exports.seeAllInventory = async (req, res) => {
-    const inventory = await db.inventory.findAll();
-    res.json(inventory);
+    try{
+        const inventory = await db.inventory.findAll({
+            where: {
+                proyek: req.body.proyek
+            }
+        });
+        res.json(inventory);
+    }catch(e){
+        res.json(e);
+    }
+    
 };
+
+exports.findInventory = async (req, res) =>{
+    let data = req.query
+    try{
+        const found = await db.inventory.findOne({
+            where: {
+                namabarang: data.namabarang,
+                proyek: data.proyek
+            }
+        })
+        res.json(found)
+    }catch(e){
+        res.json(e)
+    }
+    /*let data = req.body;
+    try{
+        for(let i = 0 ; i < data.length; i++){
+            const found = await db.inventory.findOne({
+                where: {
+                    namabarang: data[i].namabarang,
+                    proyek: data[i].proyek
+                }
+            });
+            res.json(found);
+        }
+    }catch (e){
+        console.error(e)
+    }*/
+    
+}
 
 // gk pake
 exports.seeAllVANYAPARKCLUSTERAZURA = async (req, res) => {
@@ -64,36 +103,6 @@ exports.seeAllGATECLUSTER = async (req, res) => {
     const inventory = await db.inventoryGateCluster.findAll();
     res.json(inventory);
 };
-
-exports.findInventory = async (req, res) =>{
-    let data = req.query
-    try{
-        const found = await db.inventory.findOne({
-            where: {
-                namabarang: data.namabarang,
-                proyek: data.proyek
-            }
-        })
-        res.json(found)
-    }catch(e){
-        console.error(e)
-    }
-    /*let data = req.body;
-    try{
-        for(let i = 0 ; i < data.length; i++){
-            const found = await db.inventory.findOne({
-                where: {
-                    namabarang: data[i].namabarang,
-                    proyek: data[i].proyek
-                }
-            });
-            res.json(found);
-        }
-    }catch (e){
-        console.error(e)
-    }*/
-    
-}
     
 /* gk pake */
 exports.findInventoryGateCluster = async (req, res) =>{

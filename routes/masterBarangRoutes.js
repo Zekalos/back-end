@@ -6,6 +6,8 @@ module.exports = (express, app) => {
     router.get("/search", controller.searchByName);
     router.get("/list", controller.seeMasterBarangProyek);
     router.get("/check", controller.checkBarang);
+
+    router.get("/seeNamaBarang", controller.seeNamaBarang);
   
     router.post("/", controller.create);
 
