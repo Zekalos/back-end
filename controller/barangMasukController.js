@@ -70,7 +70,21 @@ exports.searchByName = async (req, res) => {
 };
 
 exports.update = (req, res) => {
-  
+    const filePath = req.body.filePath
+    const data = req.body
+    const ID = req.params.id;
+
+    const fs = require('fs')
+    fs.readFile( filePath , 'utf-8' , (err, Jsondata)=>{
+      if (err) {
+        return;
+      }try{
+        // const updatedData = {...data, ...inputs}
+        res.json(Jsondata)
+      }catch(err){
+        res.json(err)
+      }
+    })
 };
 
 exports.delete = (req, res) => {
@@ -80,3 +94,4 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
   
 };
+
